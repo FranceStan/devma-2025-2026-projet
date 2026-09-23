@@ -37,6 +37,7 @@ Le produit attendu est une application de suivi budgétaire simple, claire et ut
 - modèles partagés : `Category`, `Transaction`, `YearMonth`
 - logique métier partagée : `EcoBudgetDomain`
 - logique d’état de présentation partagée : `EcoBudgetPresentation`
+- store d’état partagé : `EcoBudgetStore`
 - contrats de repository communs et implémentation in-memory
 - tests Kotlin communs validés pour le module partagé
 
@@ -90,6 +91,7 @@ Le produit attendu est une application de suivi budgétaire simple, claire et ut
 - fonctions de logique métier en verbes explicites ;
 - `YearMonth` pour toute logique liée au mois ;
 - `EcoBudgetPresentation` pour l’état calculé de l’UI commune ;
+- `EcoBudgetStore` pour l’état réactif et les commandes de budget partagées ;
 - `TransactionRepository` comme contrat de données partagé.
 
 ## 6. Modèles métier clés

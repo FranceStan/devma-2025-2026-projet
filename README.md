@@ -68,6 +68,8 @@ Les éléments déjà migrés dans cette base de travail sont :
 - ajout d’un test de smoke dans `commonTest` ;
 - raccordement du module `app` vers `project(":shared")` ;
 - adaptation de l’UI Android pour utiliser les modèles partagés sans dépendances Android dans le code partagé.
+- extraction de l’état et des commandes de budget dans `EcoBudgetStore` en `commonMain` ;
+- adaptation du `EcoBudgetViewModel` Android pour déléguer au store partagé.
 
 ## Décisions techniques et compatibilité
 
@@ -158,7 +160,6 @@ Le build Android a également confirmé l’intégration de la présentation par
 
 ## Améliorations possibles
 
-- migrer progressivement le ViewModel Android vers une logique de store partagé ;
 - centraliser les textes fonctionnels dans une abstraction de ressources commune ;
 - migrer les repositories vers des implémentations plus réalistes côté iOS/Android ;
 - ajouter des tests unitaires plus détaillés sur les totaux, filtres et navigation mensuelle ;
