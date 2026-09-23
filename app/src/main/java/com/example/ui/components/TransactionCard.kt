@@ -41,12 +41,12 @@ import com.example.ui.theme.DarkCardBadge
 import com.example.ui.theme.DarkOutline
 import com.example.ui.theme.DarkSurfaceVariant
 import com.example.ui.theme.DarkTextSecondary
-
-private fun categoryLabel(category: Category): String = category.label
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
+private fun categoryLabel(category: Category): String = category.label
 
 /**
  * Composant atomique réutilisable pour afficher chaque dépense.
