@@ -143,17 +143,22 @@ Les commandes suivantes ont été utilisées ou sont recommandées pour la valid
 
 ## Résultats de validation réels
 
-L’environnement utilisé pour la validation a montré que le projet Android nécessite l’installation et l’acceptation des composants Android SDK du système local. Le code Kotlin dans l’éditeur ne présente pas d’erreurs de syntaxe ou de type sur les fichiers modifiés, mais la validation Gradle complète est actuellement bloquée par l’environnement de build local, notamment lors du démarrage du wrapper Gradle/Android SDK. La mise en place du module `shared` et les changements de migration ont bien été réalisés dans le dépôt, mais la validation de bout en bout par Gradle n’a pas pu être confirmée de manière définitive dans ce contexte.
+La validation locale est opérationnelle avec Java 17 et le SDK Android configurés. Les contrôles suivants passent actuellement :
+
+- `./gradlew.bat :shared:testDebugUnitTest --console=plain`
+- `./gradlew.bat :app:assembleDebug --console=plain`
+
+Le build Android a également confirmé l’intégration de la présentation partagée dans le module `app`, notamment après la centralisation des calculs dans `EcoBudgetDomain.summarizeMonth(...)`.
 
 ## Limites connues
 
-- le projet n’a pas encore été migré complètement vers des états de présentation partagés complets ;
+- l’UI Android reste native et le passage à Compose Multiplatform n’est pas commencé ;
 - la documentation et l’architecture KMP sont préparées mais les phases suivantes de migration plus avancées doivent être poursuivies dans des branches dédiées ;
 - la validation Android complète dépend d’un SDK Android et d’un Gradle pleinement initialisés sur la machine locale.
 
 ## Améliorations possibles
 
-- migrer le ViewModel Android vers une logique de store partagé ;
+- migrer progressivement le ViewModel Android vers une logique de store partagé ;
 - centraliser les textes fonctionnels dans une abstraction de ressources commune ;
 - migrer les repositories vers des implémentations plus réalistes côté iOS/Android ;
 - ajouter des tests unitaires plus détaillés sur les totaux, filtres et navigation mensuelle ;

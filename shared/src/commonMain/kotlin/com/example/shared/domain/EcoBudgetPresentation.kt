@@ -36,27 +36,24 @@ object EcoBudgetPresentation {
         isAddDialogOpen: Boolean = false,
         editingTransaction: Transaction? = null
     ): EcoBudgetUiState {
+        val summary = EcoBudgetDomain.summarizeMonth(
+            transactions = transactions,
+            month = currentMonth,
+            monthlyBudget = monthlyBudget,
+            selectedCategories = selectedCategories
+        )
         val monthTransactions = transactions.filter { currentMonth.containsTimestamp(it.date) }
-        val filteredTransactions = if (selectedCategories.isEmpty() || selectedCategories.size == Category.entries.size) {
-            monthTransactions
-        } else {
-            monthTransactions.filter { it.category in selectedCategories }
-        }
-
-        val totalSpent = monthTransactions.sumOf { it.amount }
-        val categorySpent = filteredTransactions.sumOf { it.amount }
-        val remainingBudget = (monthlyBudget - totalSpent).coerceAtLeast(0.0)
 
         return EcoBudgetUiState(
             currentMonth = currentMonth,
-            filteredTransactions = filteredTransactions,
+            filteredTransactions = summary.filteredTransactions,
             monthTransactions = monthTransactions,
             allTransactions = transactions,
             selectedCategories = selectedCategories,
             monthlyBudget = monthlyBudget,
-            totalSpent = totalSpent,
-            categorySpent = categorySpent,
-            remainingBudget = remainingBudget,
+            totalSpent = summary.totalSpent,
+            categorySpent = summary.filteredSpent,
+            remainingBudget = summary.remainingBudget,
             isAddDialogOpen = isAddDialogOpen,
             editingTransaction = editingTransaction
         )
