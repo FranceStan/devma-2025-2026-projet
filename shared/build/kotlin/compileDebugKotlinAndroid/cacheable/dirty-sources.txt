@@ -1,0 +1,6 @@
+C:\Users\fbantantoula\StudioProjects\devma-2025-2026-projet\shared\src\commonMain\kotlin\com\example\shared\model\Category.kt
+C:\Users\fbantantoula\StudioProjects\devma-2025-2026-projet\shared\src\commonMain\kotlin\com\example\shared\domain\EcoBudgetDomain.kt
+C:\Users\fbantantoula\StudioProjects\devma-2025-2026-projet\shared\src\commonMain\kotlin\com\example\shared\model\YearMonth.kt
+C:\Users\fbantantoula\StudioProjects\devma-2025-2026-projet\shared\src\commonMain\kotlin\com\example\shared\model\Transaction.kt
+C:\Users\fbantantoula\StudioProjects\devma-2025-2026-projet\shared\src\commonMain\kotlin\com\example\shared\data\repository\FakeTransactionRepository.kt
+C:\Users\fbantantoula\StudioProjects\devma-2025-2026-projet\shared\src\commonMain\kotlin\com\example\shared\data\repository\TransactionRepository.kt
