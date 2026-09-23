@@ -1,8 +1,9 @@
+@file:OptIn(kotlin.time.ExperimentalTime::class)
+
 package com.example.shared.model
 
-import kotlinx.datetime.Clock
+import com.example.shared.platform.currentEpochMilliseconds
 import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
@@ -32,7 +33,7 @@ data class YearMonth(
         )
 
         fun current(): YearMonth {
-            val now = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+            val now = Instant.fromEpochMilliseconds(currentEpochMilliseconds()).toLocalDateTime(TimeZone.currentSystemDefault())
             return YearMonth(now.year, now.monthNumber - 1)
         }
 

@@ -4,6 +4,13 @@ plugins {
 }
 
 kotlin {
+    jvmToolchain(17)
+
+    compilerOptions {
+        languageVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_1)
+    }
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -24,6 +31,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(kotlin("test"))
+            implementation(libs.kotlinx.coroutines.test)
         }
 
         androidMain.dependencies {
