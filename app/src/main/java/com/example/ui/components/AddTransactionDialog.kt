@@ -54,14 +54,7 @@ import com.example.ui.theme.DarkTextSecondary
 import com.example.ui.theme.VioletPrimary
 import com.example.ui.theme.VioletPrimaryLight
 
-private fun categoryLabel(category: Category): String {
-    return when (category) {
-        Category.TRANSPORT -> "Transport"
-        Category.ALIMENTATION -> "Alimentation"
-        Category.LOISIRS -> "Loisirs"
-        Category.LOGEMENT -> "Logement"
-    }
-}
+private fun categoryLabel(category: Category): String = category.label
 
 /**
  * Boîte de dialogue permettant l'enregistrement ou la modification d'une dépense.

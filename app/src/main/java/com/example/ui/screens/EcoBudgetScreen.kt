@@ -64,14 +64,7 @@ import com.example.viewmodel.EcoBudgetViewModel
 import java.text.NumberFormat
 import java.util.Locale
 
-private fun categoryLabel(category: Category): String {
-    return when (category) {
-        Category.TRANSPORT -> "Transport"
-        Category.ALIMENTATION -> "Alimentation"
-        Category.LOISIRS -> "Loisirs"
-        Category.LOGEMENT -> "Logement"
-    }
-}
+private fun categoryLabel(category: Category): String = category.label
 
 /**
  * Écran principal d'EcoBudget :

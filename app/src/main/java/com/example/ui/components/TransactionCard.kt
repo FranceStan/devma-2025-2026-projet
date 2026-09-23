@@ -42,14 +42,7 @@ import com.example.ui.theme.DarkOutline
 import com.example.ui.theme.DarkSurfaceVariant
 import com.example.ui.theme.DarkTextSecondary
 
-private fun categoryLabel(category: Category): String {
-    return when (category) {
-        Category.TRANSPORT -> "Transport"
-        Category.ALIMENTATION -> "Alimentation"
-        Category.LOISIRS -> "Loisirs"
-        Category.LOGEMENT -> "Logement"
-    }
-}
+private fun categoryLabel(category: Category): String = category.label
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
