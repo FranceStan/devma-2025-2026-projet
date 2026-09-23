@@ -49,7 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.R
-import com.example.model.Category
+import com.example.shared.model.Category
 import com.example.ui.components.AddTransactionDialog
 import com.example.ui.components.MonthNavigatorBar
 import com.example.ui.components.TransactionCard
@@ -63,6 +63,15 @@ import com.example.ui.theme.VioletPrimaryLight
 import com.example.viewmodel.EcoBudgetViewModel
 import java.text.NumberFormat
 import java.util.Locale
+
+private fun categoryLabel(category: Category): String {
+    return when (category) {
+        Category.TRANSPORT -> "Transport"
+        Category.ALIMENTATION -> "Alimentation"
+        Category.LOISIRS -> "Loisirs"
+        Category.LOGEMENT -> "Logement"
+    }
+}
 
 /**
  * Écran principal d'EcoBudget :
@@ -163,7 +172,7 @@ fun EcoBudgetScreen(
                         uiState.isAllCategoriesSelected -> stringResource(R.string.all_categories_summary)
                         uiState.selectedCategories.size == 1 -> {
                             val cat = uiState.selectedCategories.first()
-                            "${cat.emoji} ${stringResource(cat.labelResId)}"
+                            "${cat.emoji} ${categoryLabel(cat)}"
                         }
                         else -> {
                             val emojis = uiState.selectedCategories.joinToString(" ") { it.emoji }
@@ -490,7 +499,7 @@ private fun CategoryMultiFilterLazyRow(
             items = Category.entries.toTypedArray(),
             key = { "filter_chip_${it.name}" }
         ) { category ->
-            val label = stringResource(category.labelResId)
+            val label = categoryLabel(category)
             val isSelected = !isAllSelected && selectedCategories.contains(category)
 
             FilterCategoryChip(
