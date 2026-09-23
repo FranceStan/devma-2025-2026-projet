@@ -35,11 +35,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
-import com.example.model.Transaction
+import com.example.shared.model.Category
+import com.example.shared.model.Transaction
 import com.example.ui.theme.DarkCardBadge
 import com.example.ui.theme.DarkOutline
 import com.example.ui.theme.DarkSurfaceVariant
 import com.example.ui.theme.DarkTextSecondary
+
+private fun categoryLabel(category: Category): String {
+    return when (category) {
+        Category.TRANSPORT -> "Transport"
+        Category.ALIMENTATION -> "Alimentation"
+        Category.LOISIRS -> "Loisirs"
+        Category.LOGEMENT -> "Logement"
+    }
+}
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -61,7 +71,7 @@ fun TransactionCard(
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val categoryName = stringResource(transaction.category.labelResId)
+    val categoryName = categoryLabel(transaction.category)
     val todayText = stringResource(R.string.date_today)
     val yesterdayText = stringResource(R.string.date_yesterday)
     val currencyFcfa = stringResource(R.string.currency_fcfa)
