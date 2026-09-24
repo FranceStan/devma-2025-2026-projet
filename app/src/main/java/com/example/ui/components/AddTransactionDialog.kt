@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import com.example.R
 import com.example.shared.model.Category
 import com.example.shared.model.Transaction
+import com.example.shared.resources.EcoBudgetStrings
 import com.example.ui.theme.DarkDialogBackground
 import com.example.ui.theme.DarkDialogChipInactive
 import com.example.ui.theme.DarkDialogFieldBackground
@@ -108,9 +109,9 @@ fun AddTransactionDialog(
         title = {
             Text(
                 text = if (isEditMode) {
-                    stringResource(R.string.dialog_title_edit)
+                    EcoBudgetStrings.dialogTitleEditExpense
                 } else {
-                    stringResource(R.string.dialog_title_new)
+                    EcoBudgetStrings.dialogTitleNewExpense
                 },
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontSize = 20.sp,
@@ -175,7 +176,7 @@ fun AddTransactionDialog(
                     isError = isError && amountText.isBlank(),
                     trailingIcon = {
                         Text(
-                            text = stringResource(R.string.currency_fcfa),
+                            text = EcoBudgetStrings.currencyFcfa,
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
                             color = VioletPrimaryLight,
@@ -212,7 +213,7 @@ fun AddTransactionDialog(
                 // Sélecteur de catégorie
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = stringResource(R.string.label_category),
+                        text = EcoBudgetStrings.categoryLabel,
                         style = MaterialTheme.typography.labelMedium.copy(
                             fontSize = 13.sp,
                             fontWeight = FontWeight.SemiBold
@@ -290,9 +291,9 @@ fun AddTransactionDialog(
             ) {
                 Text(
                     text = if (isEditMode) {
-                        stringResource(R.string.btn_save)
+                        EcoBudgetStrings.saveAction
                     } else {
-                        stringResource(R.string.btn_add)
+                        EcoBudgetStrings.addAction
                     },
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -305,7 +306,7 @@ fun AddTransactionDialog(
                 modifier = Modifier.testTag("button_cancel_add_transaction")
             ) {
                 Text(
-                    text = stringResource(R.string.btn_cancel),
+                    text = EcoBudgetStrings.cancelAction,
                     color = DarkTextSecondary,
                     fontWeight = FontWeight.Medium
                 )
