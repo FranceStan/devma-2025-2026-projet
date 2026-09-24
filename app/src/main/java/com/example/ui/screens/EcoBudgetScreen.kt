@@ -52,7 +52,7 @@ import com.example.R
 import com.example.shared.model.Category
 import com.example.shared.resources.EcoBudgetStrings
 import com.example.ui.components.AddTransactionDialog
-import com.example.ui.components.CategoryExpenseBreakdown
+import com.example.shared.ui.components.CategoryExpenseBreakdown
 import com.example.ui.components.MonthNavigatorBar
 import com.example.ui.components.TransactionCard
 import com.example.ui.theme.DarkBackground
