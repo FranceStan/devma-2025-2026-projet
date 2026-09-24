@@ -70,6 +70,7 @@ Les éléments déjà migrés dans cette base de travail sont :
 - adaptation de l’UI Android pour utiliser les modèles partagés sans dépendances Android dans le code partagé.
 - extraction de l’état et des commandes de budget dans `EcoBudgetStore` en `commonMain` ;
 - adaptation du `EcoBudgetViewModel` Android pour déléguer au store partagé.
+- ajout d’une persistance Android Room derrière le contrat `TransactionRepository` ;
 
 ## Décisions techniques et compatibilité
 
@@ -92,6 +93,10 @@ L’énumération `Category` dans le module commun ne contient plus de `labelRes
 ### Gestion des coroutines
 
 Les dépendances de coroutines Kotlin sont conservées en version compatible avec la version de Kotlin du projet. Les flux de données restent basés sur `Flow` pour une intégration simple avec l’UI Android actuelle.
+
+### Persistance Android
+
+La persistance Android utilise Room dans `app` : `TransactionEntity`, `TransactionDao`, `EcoBudgetDatabase` et `RoomTransactionRepository`. Le module `shared` ne dépend pas de Room et conserve uniquement le contrat portable `TransactionRepository`, ce qui laisse la possibilité d’utiliser une autre implémentation sur iOS.
 
 ## Fichiers migrés
 
@@ -162,6 +167,7 @@ Le build Android a également confirmé l’intégration de la présentation par
 
 - centraliser les textes fonctionnels dans une abstraction de ressources commune ;
 - migrer les repositories vers des implémentations plus réalistes côté iOS/Android ;
+- ajouter une implémentation de persistance iOS derrière le même contrat partagé ;
 - ajouter des tests unitaires plus détaillés sur les totaux, filtres et navigation mensuelle ;
 - finaliser la préparation à Compose Multiplatform.
 

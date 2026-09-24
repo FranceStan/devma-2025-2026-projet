@@ -1,8 +1,10 @@
 package com.example.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.data.repository.FakeTransactionRepository
+import com.example.data.repository.EcoBudgetDatabase
+import com.example.data.repository.RoomTransactionRepository
 import com.example.data.repository.TransactionRepository
 import com.example.shared.domain.EcoBudgetStore
 import com.example.shared.domain.EcoBudgetUiState
@@ -18,9 +20,10 @@ import java.util.UUID
  *
  * @param repository Dépôt de données pour les transactions.
  */
-class EcoBudgetViewModel(
-    private val repository: TransactionRepository = FakeTransactionRepository()
-) : ViewModel() {
+class EcoBudgetViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: TransactionRepository = RoomTransactionRepository(
+        EcoBudgetDatabase.getInstance(application).transactionDao()
+    )
     private val store = EcoBudgetStore(
         repository = repository,
         scope = viewModelScope,

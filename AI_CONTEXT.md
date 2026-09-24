@@ -39,6 +39,7 @@ Le produit attendu est une application de suivi budgétaire simple, claire et ut
 - logique d’état de présentation partagée : `EcoBudgetPresentation`
 - store d’état partagé : `EcoBudgetStore`
 - contrats de repository communs et implémentation in-memory
+- persistance Android Room derrière le contrat partagé
 - tests Kotlin communs validés pour le module partagé
 
 ### Ce qui reste à faire dans le cadre de la migration progressive
@@ -92,6 +93,7 @@ Le produit attendu est une application de suivi budgétaire simple, claire et ut
 - `YearMonth` pour toute logique liée au mois ;
 - `EcoBudgetPresentation` pour l’état calculé de l’UI commune ;
 - `EcoBudgetStore` pour l’état réactif et les commandes de budget partagées ;
+- `RoomTransactionRepository` pour l’implémentation persistante Android ;
 - `TransactionRepository` comme contrat de données partagé.
 
 ## 6. Modèles métier clés
