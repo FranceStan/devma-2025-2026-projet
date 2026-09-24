@@ -13,4 +13,5 @@ object EcoBudgetStrings {
     const val saveAction = "Enregistrer"
     const val addAction = "Ajouter"
     const val cancelAction = "Annuler"
+    const val categoryDistributionTitle = "Répartition des dépenses"
 }

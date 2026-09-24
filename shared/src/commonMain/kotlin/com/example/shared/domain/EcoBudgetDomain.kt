@@ -22,6 +22,34 @@ object EcoBudgetDomain {
 
     fun totalSpent(transactions: List<Transaction>): Double = transactions.sumOf { it.amount }
 
+    data class CategoryExpenseStat(
+        val category: Category,
+        val total: Double,
+        val percentage: Float
+    )
+
+    fun categoryBreakdown(
+        transactions: List<Transaction>,
+        month: YearMonth
+    ): List<CategoryExpenseStat> {
+        val monthTransactions = transactions.filter { month.containsTimestamp(it.date) }
+        val totalSpent = totalSpent(monthTransactions)
+        return Category.entries.map { category ->
+            val categoryTotal = monthTransactions
+                .filter { it.category == category }
+                .sumOf { it.amount }
+            CategoryExpenseStat(
+                category = category,
+                total = categoryTotal,
+                percentage = if (totalSpent > 0.0) {
+                    (categoryTotal / totalSpent).toFloat()
+                } else {
+                    0f
+                }
+            )
+        }
+    }
+
     fun remainingBudget(monthlyBudget: Double, spent: Double): Double =
         (monthlyBudget - spent).coerceAtLeast(0.0)
 
