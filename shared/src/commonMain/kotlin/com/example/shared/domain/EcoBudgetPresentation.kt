@@ -12,6 +12,7 @@ data class EcoBudgetUiState(
     val selectedCategories: Set<Category> = emptySet(),
     val monthlyBudget: Double = 500000.0,
     val totalSpent: Double = 0.0,
+    val categoryStatistics: List<EcoBudgetDomain.CategoryExpenseStat> = emptyList(),
     val categorySpent: Double = 0.0,
     val remainingBudget: Double = 500000.0,
     val isAddDialogOpen: Boolean = false,
@@ -43,6 +44,7 @@ object EcoBudgetPresentation {
             selectedCategories = selectedCategories
         )
         val monthTransactions = transactions.filter { currentMonth.containsTimestamp(it.date) }
+        val categoryStatistics = EcoBudgetDomain.categoryBreakdown(transactions, currentMonth)
 
         return EcoBudgetUiState(
             currentMonth = currentMonth,
@@ -52,6 +54,7 @@ object EcoBudgetPresentation {
             selectedCategories = selectedCategories,
             monthlyBudget = monthlyBudget,
             totalSpent = summary.totalSpent,
+            categoryStatistics = categoryStatistics,
             categorySpent = summary.filteredSpent,
             remainingBudget = summary.remainingBudget,
             isAddDialogOpen = isAddDialogOpen,

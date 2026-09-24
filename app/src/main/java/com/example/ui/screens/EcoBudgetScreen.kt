@@ -52,6 +52,7 @@ import com.example.R
 import com.example.shared.model.Category
 import com.example.shared.resources.EcoBudgetStrings
 import com.example.ui.components.AddTransactionDialog
+import com.example.ui.components.CategoryExpenseBreakdown
 import com.example.ui.components.MonthNavigatorBar
 import com.example.ui.components.TransactionCard
 import com.example.ui.theme.DarkBackground
@@ -232,6 +233,10 @@ fun EcoBudgetScreen(
                             )
                         }
                     }
+                }
+
+                item(key = "category_expense_breakdown") {
+                    CategoryExpenseBreakdown(statistics = uiState.categoryStatistics)
                 }
 
                 // Section 5 : Titre de la liste des transactions
