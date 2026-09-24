@@ -14,7 +14,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,20 +28,15 @@ import com.example.ui.theme.DarkSurfaceVariant
 import com.example.ui.theme.DarkTextSecondary
 import com.example.ui.theme.VioletPrimary
 import com.example.ui.theme.VioletPrimaryLight
-import java.text.NumberFormat
-import java.util.Locale
+
+private fun formatAmount(amount: Double): String =
+    if (amount % 1.0 == 0.0) amount.toLong().toString() else amount.toString()
 
 @Composable
 fun CategoryExpenseBreakdown(
     statistics: List<EcoBudgetDomain.CategoryExpenseStat>,
     modifier: Modifier = Modifier
 ) {
-    val formatFcfa = remember {
-        NumberFormat.getNumberInstance(Locale.FRENCH).apply {
-            maximumFractionDigits = 0
-        }
-    }
-
     Surface(
         modifier = modifier
             .fillMaxWidth()
@@ -75,7 +69,7 @@ fun CategoryExpenseBreakdown(
                             style = MaterialTheme.typography.bodySmall
                         )
                         Text(
-                            text = "${(statistic.percentage * 100).toInt()}%  ${formatFcfa.format(statistic.total)} ${EcoBudgetStrings.currencyFcfa}",
+                            text = "${(statistic.percentage * 100).toInt()}%  ${formatAmount(statistic.total)} ${EcoBudgetStrings.currencyFcfa}",
                             color = DarkTextSecondary,
                             fontSize = 11.sp
                         )
