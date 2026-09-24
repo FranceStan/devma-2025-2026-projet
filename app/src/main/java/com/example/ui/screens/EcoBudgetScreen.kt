@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.R
 import com.example.shared.model.Category
+import com.example.shared.resources.EcoBudgetStrings
 import com.example.ui.components.AddTransactionDialog
 import com.example.ui.components.MonthNavigatorBar
 import com.example.ui.components.TransactionCard
@@ -177,7 +178,7 @@ fun EcoBudgetScreen(
                         }
                     }
 
-                    val currencyFcfa = stringResource(R.string.currency_fcfa)
+                    val currencyFcfa = EcoBudgetStrings.currencyFcfa
 
                     Surface(
                         modifier = Modifier
@@ -400,7 +401,7 @@ private fun EcoBudgetOverviewCard(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = stringResource(R.string.currency_fcfa),
+                    text = EcoBudgetStrings.currencyFcfa,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFEDE9FE),

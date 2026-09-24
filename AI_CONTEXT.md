@@ -213,9 +213,10 @@ Ce dépôt est pensé pour être repris et enrichi par plusieurs contributeurs. 
 - conserver le comportement Android fonctionnel
 - sécuriser la logique commune avec des tests
 
-### Phase 3 — ressources et textes partagés
+### Phase 3 — ressources et textes partagés (terminée)
 - migrer les libellés vers une abstraction commune
-- définir le mapping des libellés côté Android
+- centraliser les textes métier dans `EcoBudgetStrings` en `commonMain`
+- conserver les ressources Android pour les textes spécifiques à l’accessibilité et à la présentation
 - éviter les dépendances directes vers `R.string` dans `commonMain`
 
 ### Phase 4 — validation Android complète

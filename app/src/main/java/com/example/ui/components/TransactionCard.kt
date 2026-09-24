@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.example.R
 import com.example.shared.model.Category
 import com.example.shared.model.Transaction
+import com.example.shared.resources.EcoBudgetStrings
 import com.example.ui.theme.DarkCardBadge
 import com.example.ui.theme.DarkOutline
 import com.example.ui.theme.DarkSurfaceVariant
@@ -65,9 +66,9 @@ fun TransactionCard(
     modifier: Modifier = Modifier
 ) {
     val categoryName = categoryLabel(transaction.category)
-    val todayText = stringResource(R.string.date_today)
-    val yesterdayText = stringResource(R.string.date_yesterday)
-    val currencyFcfa = stringResource(R.string.currency_fcfa)
+    val todayText = EcoBudgetStrings.dateToday
+    val yesterdayText = EcoBudgetStrings.dateYesterday
+    val currencyFcfa = EcoBudgetStrings.currencyFcfa
 
     val formattedDate = remember(transaction.date, todayText, yesterdayText) {
         formatRelativeDate(transaction.date, todayText, yesterdayText)
