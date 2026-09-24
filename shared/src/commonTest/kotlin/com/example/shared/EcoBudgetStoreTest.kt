@@ -39,4 +39,41 @@ class EcoBudgetStoreTest {
         assertEquals(Category.ALIMENTATION, created.category)
         assertFalse(savedState.isAddDialogOpen)
     }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `store navigates between months`() = runTest {
+        val initialMonth = YearMonth(2025, 10)
+        val store = EcoBudgetStore(
+            repository = FakeTransactionRepository(),
+            scope = backgroundScope,
+            idGenerator = { "unused-id" },
+            initialMonth = initialMonth
+        )
+
+        store.nextMonth()
+        assertEquals(initialMonth.next(), store.uiState.first { it.currentMonth == initialMonth.next() }.currentMonth)
+
+        store.previousMonth()
+        assertEquals(initialMonth, store.uiState.first { it.currentMonth == initialMonth }.currentMonth)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `store filters visible transactions by selected category`() = runTest {
+        val month = YearMonth.fromTimestamp(1_700_000_000_000L)
+        val store = EcoBudgetStore(
+            repository = FakeTransactionRepository(),
+            scope = backgroundScope,
+            idGenerator = { "unused-id" },
+            initialMonth = month
+        )
+
+        val allState = store.uiState.first { it.monthTransactions.isNotEmpty() }
+        store.toggleCategory(Category.TRANSPORT)
+        val filteredState = store.uiState.first { it.selectedCategories == setOf(Category.TRANSPORT) }
+
+        assertTrue(allState.monthTransactions.size > filteredState.filteredTransactions.size)
+        assertTrue(filteredState.filteredTransactions.all { it.category == Category.TRANSPORT })
+    }
 }

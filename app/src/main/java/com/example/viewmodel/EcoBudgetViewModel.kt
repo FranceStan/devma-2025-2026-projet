@@ -27,7 +27,7 @@ class EcoBudgetViewModel(application: Application) : AndroidViewModel(applicatio
     private val store = EcoBudgetStore(
         repository = repository,
         scope = viewModelScope,
-        idGenerator = UUID.randomUUID()::toString
+        idGenerator = { UUID.randomUUID().toString() }
     )
 
     val uiState: StateFlow<EcoBudgetUiState> = store.uiState
