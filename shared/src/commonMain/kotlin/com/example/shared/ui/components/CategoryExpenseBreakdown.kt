@@ -1,4 +1,4 @@
-package com.example.ui.components
+package com.example.shared.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,11 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.shared.domain.EcoBudgetDomain
 import com.example.shared.resources.EcoBudgetStrings
-import com.example.ui.theme.DarkOutline
-import com.example.ui.theme.DarkSurfaceVariant
-import com.example.ui.theme.DarkTextSecondary
-import com.example.ui.theme.VioletPrimary
-import com.example.ui.theme.VioletPrimaryLight
+
+private val breakdownSurface = Color(0xFF22242E)
+private val breakdownOutline = Color(0xFF383A48)
+private val breakdownTextSecondary = Color(0xFFB4B7C5)
+private val breakdownPrimary = Color(0xFF7C3AED)
+private val breakdownPrimaryLight = Color(0xFF8B5CF6)
 
 private fun formatAmount(amount: Double): String =
     if (amount % 1.0 == 0.0) amount.toLong().toString() else amount.toString()
@@ -41,9 +42,9 @@ fun CategoryExpenseBreakdown(
         modifier = modifier
             .fillMaxWidth()
             .testTag("category_expense_breakdown"),
-        color = DarkSurfaceVariant,
+        color = breakdownSurface,
         shape = RoundedCornerShape(16.dp),
-        border = androidx.compose.foundation.BorderStroke(1.dp, DarkOutline)
+        border = androidx.compose.foundation.BorderStroke(1.dp, breakdownOutline)
     ) {
         Column(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 14.dp),
@@ -56,7 +57,7 @@ fun CategoryExpenseBreakdown(
             )
 
             statistics.forEachIndexed { index, statistic ->
-                val color = if (index % 2 == 0) VioletPrimary else VioletPrimaryLight
+                val color = if (index % 2 == 0) breakdownPrimary else breakdownPrimaryLight
                 Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -70,7 +71,7 @@ fun CategoryExpenseBreakdown(
                         )
                         Text(
                             text = "${(statistic.percentage * 100).toInt()}%  ${formatAmount(statistic.total)} ${EcoBudgetStrings.currencyFcfa}",
-                            color = DarkTextSecondary,
+                            color = breakdownTextSecondary,
                             fontSize = 11.sp
                         )
                     }
@@ -80,7 +81,7 @@ fun CategoryExpenseBreakdown(
                             .fillMaxWidth()
                             .height(6.dp),
                         color = color,
-                        trackColor = DarkOutline,
+                        trackColor = breakdownOutline,
                         drawStopIndicator = {}
                     )
                 }
