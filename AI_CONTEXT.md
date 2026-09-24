@@ -62,7 +62,7 @@ Le produit attendu est une application de suivi budgétaire simple, claire et ut
 
 ### Versions prises en compte
 - Kotlin : 2.1.0
-- AGP : 8.10.1
+- AGP : 8.9.2
 - Java target : 17
 
 ### Règles de migration KMP
@@ -208,7 +208,7 @@ Ce dépôt est pensé pour être repris et enrichi par plusieurs contributeurs. 
 - centraliser les modèles et la logique métier
 - valider le partage de logique commune avec tests Kotlin communs
 
-### Phase 2 — migration de la logique de présentation (en cours / terminée partiellement)
+### Phase 2 — migration de la logique de présentation (terminée)
 - déplacer les états d’UI et calculs de présentation dans `shared`
 - conserver le comportement Android fonctionnel
 - sécuriser la logique commune avec des tests
@@ -219,6 +219,12 @@ Ce dépôt est pensé pour être repris et enrichi par plusieurs contributeurs. 
 - éviter les dépendances directes vers `R.string` dans `commonMain`
 
 ### Phase 4 — validation Android complète
-- tester l’application sur émulateur/physique
-- vérifier l’intégration de la couche partagée dans le composant Android
-- corriger les écarts de comportement entre UI native et logique commune
+- tester l’application sur émulateur/physique (terminé)
+- connecter les actions Ajouter et Supprimer au `EcoBudgetStore` (terminé)
+- connecter le store au `RoomTransactionRepository` (terminé)
+- vérifier l’intégration de la couche partagée dans le composant Android (terminé)
+
+### Phase 5 — persistance et préparation multiplateforme
+- ajouter une implémentation de persistance iOS derrière `TransactionRepository`
+- remplacer progressivement les textes Android par une abstraction de ressources commune
+- préparer les premiers composants Compose Multiplatform
