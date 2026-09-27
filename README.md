@@ -1,5 +1,10 @@
 # EcoBudget — Synthèse technique KMP
 
+**Étudiant :** BANTANTOULA KOUDISSA France  
+**Architecture :** Kotlin Multiplatform (KMP) & Compose Multiplatform (CMP)  
+**Version de validation :** Android Gradle Plugin (AGP) 8.9.2 | Kotlin 2.1.0 | Java 17
+
+---
 ## 1. Présentation et architecture
 
 EcoBudget est une application mobile de suivi budgétaire. Elle permet de consulter les dépenses mensuelles, naviguer entre les mois, filtrer par catégorie, afficher les statistiques de consommation, ajouter/modifier/supprimer des transactions et calculer le budget restant.
@@ -200,3 +205,7 @@ Les tests communs couvrent notamment :
 ## État du projet
 
 La base Android est fonctionnelle et validée sur émulateur API 36. Le module `shared` contient désormais les modèles, la logique métier, l’état de présentation, les textes partagés et un premier composant Compose Multiplatform. La prochaine étape consiste à brancher une persistance iOS sur `TransactionRepository`, puis à étendre progressivement la migration des écrans Compose vers `commonMain`.
+
+## 📸 Captures d'Écran et Démonstrations
+
+Toutes les captures d'écran illustrant la stabilité, le rendu en mode sombre, le calcul automatique en temps réel (FCFA) et le système d'alertes visuelles de l'application sont disponibles dans le dossier dédié : [`/demos`](./demos).

@@ -57,7 +57,7 @@ fun CategoryExpenseBreakdown(
             )
 
             statistics.forEachIndexed { index, statistic ->
-                val color = if (index % 2 == 0) breakdownPrimary else breakdownPrimaryLight
+                val color = if (statistic.percentage > 0.5f) Color(0xFFE85D5D) else if (index % 2 == 0) breakdownPrimary else breakdownPrimaryLight
                 Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
