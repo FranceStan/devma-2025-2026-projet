@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,7 +19,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -49,8 +47,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.R
-import com.example.model.Category
+import com.example.shared.model.Category
+import com.example.shared.resources.EcoBudgetStrings
 import com.example.ui.components.AddTransactionDialog
+import com.example.shared.ui.components.CategoryExpenseBreakdown
 import com.example.ui.components.MonthNavigatorBar
 import com.example.ui.components.TransactionCard
 import com.example.ui.theme.DarkBackground
@@ -63,6 +63,8 @@ import com.example.ui.theme.VioletPrimaryLight
 import com.example.viewmodel.EcoBudgetViewModel
 import java.text.NumberFormat
 import java.util.Locale
+
+private fun categoryLabel(category: Category): String = category.label
 
 /**
  * Écran principal d'EcoBudget :
@@ -91,6 +93,9 @@ fun EcoBudgetScreen(
             .fillMaxSize()
             .background(DarkBackground),
         containerColor = DarkBackground,
+        topBar = {
+            EcoBudgetCleanHeader()
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { viewModel.openAddDialog() },
@@ -109,23 +114,14 @@ fun EcoBudgetScreen(
             }
         }
     ) { innerPadding ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .windowInsetsPadding(WindowInsets.statusBars)
-        ) {
-            // En-tête de l'application
-            EcoBudgetCleanHeader()
-
-            // Contenu défilant principal
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp),
                 contentPadding = PaddingValues(top = 2.dp, bottom = 88.dp)
-            ) {
+        ) {
                 // Section 1 : Navigateur mensuel
                 item(key = "month_navigator_section") {
                     MonthNavigatorBar(
@@ -163,7 +159,7 @@ fun EcoBudgetScreen(
                         uiState.isAllCategoriesSelected -> stringResource(R.string.all_categories_summary)
                         uiState.selectedCategories.size == 1 -> {
                             val cat = uiState.selectedCategories.first()
-                            "${cat.emoji} ${stringResource(cat.labelResId)}"
+                            "${cat.emoji} ${categoryLabel(cat)}"
                         }
                         else -> {
                             val emojis = uiState.selectedCategories.joinToString(" ") { it.emoji }
@@ -175,7 +171,7 @@ fun EcoBudgetScreen(
                         }
                     }
 
-                    val currencyFcfa = stringResource(R.string.currency_fcfa)
+                    val currencyFcfa = EcoBudgetStrings.currencyFcfa
 
                     Surface(
                         modifier = Modifier
@@ -231,6 +227,10 @@ fun EcoBudgetScreen(
                     }
                 }
 
+                item(key = "category_expense_breakdown") {
+                    CategoryExpenseBreakdown(statistics = uiState.categoryStatistics)
+                }
+
                 // Section 5 : Titre de la liste des transactions
                 item(key = "transactions_section_title") {
                     Text(
@@ -269,7 +269,6 @@ fun EcoBudgetScreen(
                         )
                     }
                 }
-            }
         }
     }
 
@@ -398,7 +397,7 @@ private fun EcoBudgetOverviewCard(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = stringResource(R.string.currency_fcfa),
+                    text = EcoBudgetStrings.currencyFcfa,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFEDE9FE),
@@ -490,7 +489,7 @@ private fun CategoryMultiFilterLazyRow(
             items = Category.entries.toTypedArray(),
             key = { "filter_chip_${it.name}" }
         ) { category ->
-            val label = stringResource(category.labelResId)
+            val label = categoryLabel(category)
             val isSelected = !isAllSelected && selectedCategories.contains(category)
 
             FilterCategoryChip(

@@ -76,6 +76,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.tooling.preview)
 
   // Android Core & Lifecycle
+  implementation(project(":shared"))
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.runtime.ktx)

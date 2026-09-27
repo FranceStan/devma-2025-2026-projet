@@ -35,7 +35,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
-import com.example.model.Transaction
+import com.example.shared.model.Category
+import com.example.shared.model.Transaction
+import com.example.shared.resources.EcoBudgetStrings
 import com.example.ui.theme.DarkCardBadge
 import com.example.ui.theme.DarkOutline
 import com.example.ui.theme.DarkSurfaceVariant
@@ -44,6 +46,8 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
+private fun categoryLabel(category: Category): String = category.label
 
 /**
  * Composant atomique réutilisable pour afficher chaque dépense.
@@ -61,10 +65,10 @@ fun TransactionCard(
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val categoryName = stringResource(transaction.category.labelResId)
-    val todayText = stringResource(R.string.date_today)
-    val yesterdayText = stringResource(R.string.date_yesterday)
-    val currencyFcfa = stringResource(R.string.currency_fcfa)
+    val categoryName = categoryLabel(transaction.category)
+    val todayText = EcoBudgetStrings.dateToday
+    val yesterdayText = EcoBudgetStrings.dateYesterday
+    val currencyFcfa = EcoBudgetStrings.currencyFcfa
 
     val formattedDate = remember(transaction.date, todayText, yesterdayText) {
         formatRelativeDate(transaction.date, todayText, yesterdayText)
